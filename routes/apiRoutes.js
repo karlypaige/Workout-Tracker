@@ -10,15 +10,13 @@ module.exports = (app) => {
     });
 
     app.post("/api/workouts", ({ body }, res) => {
-        console.log(body);
+
         models.Workout.create(body)
-            .then(Workout => res.json(workouts))
+            .then(workout => res.json(workout))
             .catch((err) => res.status(400).json(err));
     });
 
     app.put("/api/workouts/:id", (req, res) => {
-        console.log(req.body);
-        console.log(req.params.id)
         models.Workout.findOneAndUpdate(
             { _id: req.params.id },
             { $push: { exercises: req.body } },
