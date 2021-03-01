@@ -22,6 +22,7 @@ function generatePalette() {
 }
 
 function populateChart(data) {
+ 
   let durations = data.map(({ totalDuration }) => totalDuration);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
@@ -31,7 +32,7 @@ function populateChart(data) {
   let bar = document.querySelector('#canvas2').getContext('2d');
   let pie = document.querySelector('#canvas3').getContext('2d');
   let pie2 = document.querySelector('#canvas4').getContext('2d');
-
+  // console.log("^^^^^^^^^^^^populate Chart data " + JSON.stringify(data));
   const daysOfWeek = [
     'Sunday',
     'Monday',

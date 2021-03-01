@@ -11,7 +11,6 @@ module.exports = (app) => {
     });
 
     app.post("/api/workouts", ({ body }, res) => {
-
         models.Workout.create(body)
             .then(workout => res.json(workout))
             .catch((err) => res.status(400).json(err));
@@ -29,12 +28,19 @@ module.exports = (app) => {
             .catch((err) => res.status(400).json(err));
     });
 
-    app.get("/api/workouts/range", (req, res) => {  
-        const workout = new Workout(req.body);
-        workout.sumDuration();
-        models.Workout.find()
-            .then((workouts) => res.json(workouts))
+    app.get("/api/workouts/range", (req, res) => {
+        models.Workout.aggregate([
+            {
+                $addFields: {
+                    totalDuration: { 
+                        $sum: "$exercises.duration"
+                    }
+                }
+            }
+        ])
+            .then(workout => res.json(workout))
             .catch((err) => res.status(400).json(err));
-    })
 
-}
+    });
+    // updateMany({}, { $set: { "totalDuration": 100 } }, false, true);
+};
