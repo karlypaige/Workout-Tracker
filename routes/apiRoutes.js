@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { Workout } = require('../models');
 const models = require('../models');
 
 module.exports = (app) => {
@@ -27,4 +28,13 @@ module.exports = (app) => {
             .then((workouts) => res.json(workouts))
             .catch((err) => res.status(400).json(err));
     });
+
+    app.get("/api/workouts/range", (req, res) => {  
+        const workout = new Workout(req.body);
+        workout.sumDuration();
+        models.Workout.find()
+            .then((workouts) => res.json(workouts))
+            .catch((err) => res.status(400).json(err));
+    })
+
 }

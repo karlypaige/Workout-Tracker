@@ -31,13 +31,15 @@ const API = {
     });
 
     const json = await res.json();
-    console.log("++++++++SON: " + json)
+  
     return json;
   },
 
   async getWorkoutsInRange() {
+    
     const res = await fetch(`/api/workouts/range`);
     const json = await res.json();
+    console.log("getWorkoutsInRange json " + JSON.stringify(json))
 
     return json;
   },
