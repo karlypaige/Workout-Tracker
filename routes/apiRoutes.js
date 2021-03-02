@@ -37,10 +37,9 @@ module.exports = (app) => {
                     }
                 }
             }
-        ])
+        ]).sort({_id:-1}).limit(7).sort({_id:1})
             .then(workout => res.json(workout))
             .catch((err) => res.status(400).json(err));
 
     });
-    // updateMany({}, { $set: { "totalDuration": 100 } }, false, true);
 };

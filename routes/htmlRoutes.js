@@ -7,7 +7,6 @@ module.exports = (app) => {
     })
 
     app.get("/stats", (req, res) => {
-        console.log("******in htmlRoutes req.query " + JSON.stringify(req.query));
         res.sendFile(path.resolve(__dirname, '../public/stats.html')
         );
     })
